@@ -10,28 +10,21 @@ function fetch(url) {
   return new Promise((resolve, reject) => {
     https.get(url, res => {
       let data = '';
-      res.on('data', chunk => (data += chunk));
+      res.on('data', chunk => data += chunk);
       res.on('end', () => resolve(data));
     }).on('error', reject);
   });
 }
 
 (async () => {
-  try {
-    const contents = await Promise.all(urls.map(fetch));
-    const lines = contents
-      .map(content => content.split('\n'))
-      .flat()
-      .map(line => line.trim())
-      .filter(line => line && !line.startsWith('#'))
-      .filter((line, index, arr) => arr.indexOf(line) === index) // 去重
-      .sort();
-
-    fs.mkdirSync('./rules', { recursive: true });
-    fs.writeFileSync('./rules/apple.list', lines.join('\n') + '\n');
-    console.log('✅ 合并完成，共', lines.length, '条规则');
-  } catch (err) {
-    console.error('❌ 合并失败:', err);
-    process.exit(1);
-  }
+  const contents = await Promise.all(urls.map(fetch));
+  const lines = contents
+    .flatMap(c => c.split('\n'))
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith('#'))
+    .filter((line, index, arr) => arr.indexOf(line) === index)
+    .sort();
+  
+  fs.mkdirSync('rules', { recursive: true });
+  fs.writeFileSync('rules/apple.list', lines.join('\n') + '\n');
 })();
