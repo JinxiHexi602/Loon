@@ -28,7 +28,7 @@ function fetch(url) {
       .sort();
 
     fs.mkdirSync('./rules', { recursive: true });
-    fs.writeFileSync('./rules/apple_merged.list', lines.join('\n') + '\n');
+    fs.writeFileSync('./rules/apple.list', lines.join('\n') + '\n');
     console.log('✅ 合并完成，共', lines.length, '条规则');
   } catch (err) {
     console.error('❌ 合并失败:', err);
