@@ -21,7 +21,7 @@ jobs:
       - name: Run Merge Script
         run: |
           npm install
-          node merge.js
+          node merge/apple.cjs
 
       - name: Commit & Push
         run: |
