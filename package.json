@@ -1,9 +1,0 @@
-{
-  "name": "rule-merge",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "merge.cjs",
-  "scripts": {
-    "start": "node merge.cjs"
-  }
-}
