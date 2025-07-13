@@ -2,8 +2,8 @@
   "name": "rule-merge",
   "version": "1.0.0",
   "type": "module",
-  "main": "merge.js",
+  "main": "merge.cjs",
   "scripts": {
-    "start": "node merge.js"
+    "start": "node merge.cjs"
   }
 }
