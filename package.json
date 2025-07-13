@@ -1,0 +1,9 @@
+{
+  "name": "rule-merge",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "merge.js",
+  "scripts": {
+    "start": "node merge.js"
+  }
+}
