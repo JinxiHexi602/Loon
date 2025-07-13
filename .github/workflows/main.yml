@@ -1,48 +1,33 @@
-name: 自动合并 Loon Apple 规则
+name: Auto Merge Rules
 
-# 触发条件：
 on:
   schedule:
-    # 每天 00:00（北京时间），即 UTC 时间 16:00
     - cron: '0 16 * * *'
-  # 允许手动点击运行
   workflow_dispatch:
 
 jobs:
-  merge-and-update:
+  merge:
     runs-on: ubuntu-latest
 
     steps:
-      # 第一步：检出代码仓库
-      - name: Checkout repository
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
-      # 第二步：安装 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 第三步：安装依赖（读取 package.json，如果没有依赖也会成功）
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      # 第四步：运行你编写的 merge.js 脚本，合并规则
-      - name: Merge Rules
-        run: node merge.js
+      - name: Run Merge Script
+        run: npm start
 
-      # 第五步：提交变更到 GitHub 仓库
-      - name: Commit and Push changes
+      - name: Commit & Push
         run: |
-          # 设置提交者信息
-          git config user.name "github-actions[bot]"
+          git config user.name "Github-Actions[Bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # 添加变更的文件（此处是 apple.list，确保 merge.js 输出就是这个路径）
           git add rules/apple.list
-
-          # 提交（如果没有变更则跳过）
           git commit -m "Auto update rules on $(date -u +"%Y-%m-%d %H:%M:%S")" || echo "No changes"
-
-          # 推送更改
           git push
