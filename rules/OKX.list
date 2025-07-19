@@ -4,3 +4,4 @@ DOMAIN-SUFFIX,okx.com
 DOMAIN-SUFFIX,okx.com.cdn.cloudflare.net
 DOMAIN-SUFFIX,contendvc.cnouyi.pizza
 DOMAIN-SUFFIX,api.onesignal.com
+DOMAIN-SUFFIX,*.cloudfront.net
